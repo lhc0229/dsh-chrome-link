@@ -1,6 +1,6 @@
 {
   "name": "dsh-chrome-link",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "description": "Gives the DeepSeek Harness agent browser control over the locally installed Google Chrome through the Playwright MCP server.",
   "keywords": [
