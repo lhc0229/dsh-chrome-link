@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Chrome 桥接（Playwright MCP）",
+    "title": "dsh-chrome-link",
     "description": "通过 Playwright MCP 服务器让 Agent 操作本机已安装的 Google Chrome：导航页面、点击与填写表单、读取无障碍快照、截图以及查看网络请求。"
   }
 }
