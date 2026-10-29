@@ -1,0 +1,51 @@
+# npm 发布时排除的内容。
+#
+# 注意：package.json 里的 "files" 字段是白名单，优先级高于本文件——
+# 只要 "files" 存在，npm 就只打包其中列出的路径，本文件不再起决定作用。
+# 这里保留一份完整的黑名单，是为了在有人删掉 "files" 时仍然不会误发运行期产物。
+
+# 运行期生成的浏览器产物与重定向过来的缓存（体积大、无意义）
+runtime/
+
+# 依赖目录。npm 本来也不会打包 node_modules，这里显式声明一次。
+node_modules/
+
+# 编辑器与系统垃圾
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 锁文件（本包不自带锁文件，这里作防御）
+package-lock.json
+npm-shrinkwrap.json
+yarn.lock
+pnpm-lock.yaml
+
+# 打包产物本身
+*.tgz
+*.tar.gz
+
+# 测试、覆盖率与 CI 配置
+coverage/
+.nyc_output/
+test/
+tests/
+__tests__/
+.github/
+.gitlab-ci.yml
+
+# 环境变量与本地配置
+.env
+.env.*
+*.local

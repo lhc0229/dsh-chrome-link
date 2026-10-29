@@ -1,0 +1,50 @@
+# Chrome Bridge —— 为 DeepSeek Harness 的 Agent 接入 Playwright MCP。
+#
+# 共两行：
+#
+#   1. 本插件自己的 Host 插件，负责教 Agent 怎么用浏览器工具、产物落在哪里。
+#   2. 一个 MCP 客户端行，通过 stdio 启动 Playwright MCP 服务器。
+#      服务器使用本机已安装的 Google Chrome（`--browser chrome`），
+#      因此 Agent 可以导航页面、点击、填表、读取无障碍快照、截图，
+#      以及查看网络请求。
+#
+# `launcher.mjs` 与这个 patch 文件同目录。它会先把 Playwright 和 Chromium 的
+# 缓存目录重定向到一个可写的 runtime 目录，再启动服务器 —— 因为 Harness 进程
+# 可能运行在文件沙箱里，不允许写用户主目录。
+#
+# 启动器路径按 Profile 的 node_modules 目录来解析，因为 bundle 是以软链形式
+# 安装到那里的。
+#
+# ⚠️ 改包名时要同步改这三处：package.json 的 "name"、下面第一行的 name、
+# 以及最后一行 launcher 路径里的包名段。DSH 按 package.json 的名字决定安装目录，
+# 三处不一致会导致 MCP 服务器找不到启动器。
+- insert:
+    - id: chrome-bridge
+      name: 'dsh-chrome-link'
+      config: {}
+
+    - id: chrome-bridge-playwright
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        # 决定工具名前缀，即 mcp__playwright__*
+        serverName: playwright
+        transport: stdio
+        # 用当前 Host 进程自己的可执行文件，而不是依赖 PATH 里的 node ——
+        # Windows 或未装 Node 的机器上 PATH 里不一定有 node。
+        # Desktop 版 Host 是 Electron，配合下面的 ELECTRON_RUN_AS_NODE 即可当 Node 用；
+        # CLI 版 Host 本身就是 node，该变量被忽略，因此两种形态都成立。
+        command: !!js "process.execPath"
+        env:
+          ELECTRON_RUN_AS_NODE: '1'
+        args:
+          - !!js "ctx.get('profileContext').dir + '/node_modules/dsh-chrome-link/launcher.mjs'"
+        # 没装 Chrome 也不能把整个 Harness 拖崩
+        failOnStartupError: false
+        # 浏览器操作可能较慢，默认 60 秒对页面加载偏紧
+        toolCallTimeoutMs: 120000
+        # 服务器崩溃后自动重连，不中断会话
+        reconnect:
+          enabled: true
+          initialDelayMs: 1000
+          maxDelayMs: 15000
+          maxAttempts: 5

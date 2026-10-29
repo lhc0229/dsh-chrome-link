@@ -1,0 +1,50 @@
+{
+  "name": "dsh-chrome-link",
+  "version": "1.1.0",
+  "type": "module",
+  "description": "Gives the DeepSeek Harness agent browser control over the locally installed Google Chrome through the Playwright MCP server.",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "cordis",
+    "playwright",
+    "mcp",
+    "chrome",
+    "browser-automation"
+  ],
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "cordis.patch.yml",
+    "index.js",
+    "launcher.mjs",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soul/dsh-chrome-link.git"
+  },
+  "license": "MIT",
+  "author": "soul",
+  "engines": {
+    "node": ">=18"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dependencies": {
+    "@playwright/mcp": "^0.0.83"
+  }
+}

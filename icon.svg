@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Chrome Bridge">
+  <defs>
+    <linearGradient id="chromeRing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6d365"/>
+      <stop offset="0.45" stop-color="#e5a93c"/>
+      <stop offset="1" stop-color="#d2743a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="25" fill="url(#chromeRing)"/>
+  <path d="M32 7a25 25 0 0 1 21.65 12.5H32a12.5 12.5 0 0 0-11.08 5.84L13.5 14.8A24.96 24.96 0 0 1 32 7Z" fill="#e94235"/>
+  <path d="M13.5 14.8 20.92 25.34A12.5 12.5 0 0 0 20.9 38.5L12 49.3A25 25 0 0 1 13.5 14.8Z" fill="#34a853"/>
+  <path d="M20.9 38.5a12.5 12.5 0 0 0 17.87 0L44 45.3A25 25 0 0 1 12 49.3Z" fill="#4285f4"/>
+  <circle cx="32" cy="32" r="10.5" fill="#f1f3f4"/>
+  <circle cx="32" cy="32" r="7.5" fill="#4285f4"/>
+</svg>

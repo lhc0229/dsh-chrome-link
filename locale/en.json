@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Chrome Bridge (Playwright MCP)",
+    "description": "Gives the agent browser control over the Google Chrome installed on this machine through the Playwright MCP server: navigate pages, click and fill forms, read accessibility snapshots, capture screenshots and inspect network requests."
+  }
+}

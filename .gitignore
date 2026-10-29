@@ -1,0 +1,23 @@
+# 运行时产生的浏览器产物和重定向过来的缓存目录。
+runtime/
+
+# 依赖目录
+node_modules/
+
+# 编辑器与系统垃圾
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# 日志与打包产物
+*.log
+*.tgz
+*.tar.gz
+
+# 环境变量与本地配置
+.env
+.env.*
+*.local
